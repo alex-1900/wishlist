@@ -12,8 +12,7 @@
         "ms-azuretools.vscode-docker",
         "editorconfig.editorconfig",
         "eamodio.gitlens",
-        "remote-containers",
-        "${localEnv:USER_EXTENSIONS:-}"
+        "remote-containers"
       ],
       "settings": {
         "go.toolsManagement.checkForUpdates": "local",

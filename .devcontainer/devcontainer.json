@@ -11,8 +11,7 @@
         "redhat.vscode-yaml",
         "ms-azuretools.vscode-docker",
         "editorconfig.editorconfig",
-        "eamodio.gitlens",
-        "remote-containers"
+        "eamodio.gitlens"
       ],
       "settings": {
         "go.toolsManagement.checkForUpdates": "local",

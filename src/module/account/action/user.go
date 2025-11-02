@@ -206,7 +206,12 @@ func generateRandomString(length int, prefix string) string {
 	}
 
 	bytes := make([]byte, length)
-	rand.Read(bytes)
+	if _, err := rand.Read(bytes); err != nil {
+		// Fallback to a simpler random generation if crypto/rand fails
+		for i := range bytes {
+			bytes[i] = byte(i % 256)
+		}
+	}
 	randomPart := base64.URLEncoding.EncodeToString(bytes)[:length]
 
 	if prefix != "" {

@@ -215,7 +215,11 @@ func (r *UserRepository) List() ([]*model.User, error) {
 		log.Printf("Error listing users: %v", err)
 		return nil, fmt.Errorf("failed to list users: %w", err)
 	}
-	defer rows.Close()
+	defer func() {
+		if closeErr := rows.Close(); closeErr != nil {
+			log.Printf("Error closing rows: %v", closeErr)
+		}
+	}()
 
 	var users []*model.User
 	for rows.Next() {

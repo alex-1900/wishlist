@@ -23,8 +23,6 @@
         "go.lintTool": "golangci-lint",
         "go.lintOnSave": "workspace",
         "go.vetOnSave": "workspace",
-        "go.buildOnSave": "workspace",
-        "go.testOnSave": "workspace",
         "terminal.integrated.defaultProfile.linux": "zsh",
         "terminal.integrated.profiles.linux": {
           "bash": {
@@ -47,12 +45,18 @@
       "dockerDashComposeVersion": "v2"
     }
   },
-  "forwardPorts": [8080],
+  "forwardPorts": [8080, 5432],
   "remoteUser": "vscode",
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
-    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind"
+    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind",
+    "source=claude-code-config-${devcontainerId},target=/home/vscode/.claude,type=volume",
+    "source=npm-global-${devcontainerId},target=/usr/local/share/npm-global,type=volume"
   ],
+  "containerEnv": {
+    "NODE_OPTIONS": "--max-old-space-size=4096",
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
+  },
   "runArgs": [
     "--cap-add=SYS_PTRACE",
     "--security-opt=seccomp=unconfined"

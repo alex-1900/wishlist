@@ -1,8 +1,6 @@
 FROM mcr.microsoft.com/devcontainers/go:1.25
 USER root
 
-ARG CLAUDE_CODE_VERSION=latest
-
 RUN apt update && apt install -y \
   less \
   git \
@@ -44,4 +42,4 @@ ENV SHELL=/bin/zsh
 ENV EDITOR=nano
 ENV VISUAL=nano
 
-RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}
+RUN npm install -g @anthropic-ai/claude-code@latest
